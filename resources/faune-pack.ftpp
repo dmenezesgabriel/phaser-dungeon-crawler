@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "version": "0.6.7"
+  },
+  "savePath": "C:\\Users\\gabri\\Documents\\repos\\phaser-dungeon-crawler\\public\\characters",
+  "images": [],
+  "folders": [
+    "C:/Users/gabri/Documents/sprites/dungeon_crawler/legend of faune files/legend of faune files/Sprites/Player/sprites"
+  ],
+  "packOptions": {
+    "textureName": "faune",
+    "textureFormat": "png",
+    "removeFileExtension": false,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "Phaser 3",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\gabri\\Documents\\repos\\phaser-dungeon-crawler\\public\\characters",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}
