@@ -47,7 +47,7 @@
   ],
   "folders": [],
   "packOptions": {
-    "textureName": "lizzard",
+    "textureName": "lizard",
     "textureFormat": "png",
     "removeFileExtension": false,
     "prependFolderName": true,

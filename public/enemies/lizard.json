@@ -1,7 +1,7 @@
 {
 	"textures": [
 		{
-			"image": "lizzard",
+			"image": "lizard",
 			"format": "RGBA8888",
 			"size": {
 				"w": 16,
