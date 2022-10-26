@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "version": "0.6.7"
+  },
+  "savePath": "C:\\Users\\gabri\\Documents\\repos\\phaser-dungeon-crawler\\public\\enemies",
+  "images": [
+    {
+      "name": "lizard_m_idle_anim_f0.png",
+      "path": "C:/Users/gabri/Documents/sprites/dungeon_crawler/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/lizard_m_idle_anim_f0.png",
+      "folder": ""
+    },
+    {
+      "name": "lizard_m_idle_anim_f1.png",
+      "path": "C:/Users/gabri/Documents/sprites/dungeon_crawler/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/lizard_m_idle_anim_f1.png",
+      "folder": ""
+    },
+    {
+      "name": "lizard_m_idle_anim_f2.png",
+      "path": "C:/Users/gabri/Documents/sprites/dungeon_crawler/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/lizard_m_idle_anim_f2.png",
+      "folder": ""
+    },
+    {
+      "name": "lizard_m_idle_anim_f3.png",
+      "path": "C:/Users/gabri/Documents/sprites/dungeon_crawler/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/lizard_m_idle_anim_f3.png",
+      "folder": ""
+    },
+    {
+      "name": "lizard_m_run_anim_f0.png",
+      "path": "C:/Users/gabri/Documents/sprites/dungeon_crawler/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/lizard_m_run_anim_f0.png",
+      "folder": ""
+    },
+    {
+      "name": "lizard_m_run_anim_f1.png",
+      "path": "C:/Users/gabri/Documents/sprites/dungeon_crawler/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/lizard_m_run_anim_f1.png",
+      "folder": ""
+    },
+    {
+      "name": "lizard_m_run_anim_f2.png",
+      "path": "C:/Users/gabri/Documents/sprites/dungeon_crawler/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/lizard_m_run_anim_f2.png",
+      "folder": ""
+    },
+    {
+      "name": "lizard_m_run_anim_f3.png",
+      "path": "C:/Users/gabri/Documents/sprites/dungeon_crawler/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/lizard_m_run_anim_f3.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "lizzard",
+    "textureFormat": "png",
+    "removeFileExtension": false,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "Phaser 3",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\gabri\\Documents\\repos\\phaser-dungeon-crawler\\public\\enemies",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}

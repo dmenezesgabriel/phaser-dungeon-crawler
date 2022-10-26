@@ -60,7 +60,19 @@ export default class Game extends Phaser.Scene {
     this.faune.anims.play("faune-idle-down");
     this.physics.add.collider(this.faune, wallsLayer);
     this.cameras.main.startFollow(this.faune, true);
+
+    const lizzard = this.add.sprite(256, 128, "lizzard", "lizard_m_idle_anim_f0.png");
+
+    this.anims.create({
+      key: "lizzard-idle",
+      frames: this.anims.generateFrameNames("lizzard", { start: 0, end: 3, prefix: "lizard_m_idle_anim_f", suffix: ".png" }),
+      repeat: -1,
+      frameRate: 10,
+    });
+
+    lizzard.anims.play("lizzard-idle");
   }
+
   update(time: number, delta: number): void {
     // Move character
     if (!this.cursors || !this.faune) {
