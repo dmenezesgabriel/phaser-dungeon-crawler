@@ -7,8 +7,16 @@ enum Direction {
   RIGHT,
 }
 
+const randomDirection = (exclude: Direction) => {
+  let newDirection = Phaser.Math.Between(0, 3);
+  while (newDirection === exclude) {
+    newDirection = Phaser.Math.Between(0, 3);
+  }
+  return newDirection;
+};
 export default class Lizard extends Phaser.Physics.Arcade.Sprite {
   private direction = Direction.RIGHT;
+  private moveEvent: Phaser.Time.TimerEvent;
 
   constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
     super(scene, x, y, texture, frame);
@@ -16,6 +24,20 @@ export default class Lizard extends Phaser.Physics.Arcade.Sprite {
     this.anims.play("lizard-idle");
 
     scene.physics.world.on(Phaser.Physics.Arcade.Events.TILE_COLLIDE, this.handleTileCollision, this);
+
+    // Change direction every 2s
+    this.moveEvent = this.scene.time.addEvent({
+      delay: 2000,
+      callback: () => {
+        this.direction = randomDirection(this.direction);
+      },
+      loop: true,
+    });
+  }
+
+  destroy(fromScene?: boolean | undefined): void {
+    this.moveEvent.destroy();
+    super.destroy(fromScene);
   }
 
   private handleTileCollision(gameObject: Phaser.GameObjects.GameObject, tile: Phaser.Tilemaps.Tile) {
@@ -23,8 +45,7 @@ export default class Lizard extends Phaser.Physics.Arcade.Sprite {
       return;
     }
 
-    const newDirection = Phaser.Math.Between(0, 3);
-    this.direction = newDirection;
+    this.direction = randomDirection(this.direction);
   }
 
   protected preUpdate(time: number, delta: number): void {
