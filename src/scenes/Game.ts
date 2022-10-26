@@ -37,17 +37,21 @@ export default class Game extends Phaser.Scene {
 
     // Setup start
     this.faune.anims.play("faune-idle-down");
-    this.physics.add.collider(this.faune, wallsLayer);
     this.cameras.main.startFollow(this.faune, true);
 
     const lizards = this.physics.add.group({
       classType: Lizard,
+      createCallback: (gameObject) => {
+        // Listen to on collide event
+        const lizardGameObject = gameObject as Lizard;
+        lizardGameObject.body.onCollide = true;
+      },
     });
 
     lizards.get(256, 128, "lizard");
-    // const lizard = this.physics.add.sprite(256, 128, "lizard", "lizard_m_idle_anim_f0.png");
 
-    // lizard.anims.play("lizard-idle");
+    this.physics.add.collider(this.faune, wallsLayer);
+    this.physics.add.collider(lizards, wallsLayer);
   }
 
   update(time: number, delta: number): void {
