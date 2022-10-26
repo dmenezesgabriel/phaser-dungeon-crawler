@@ -1,5 +1,8 @@
 import Phaser from "phaser";
 import { debugDraw } from "../utils/debug";
+import { createLizardAnims } from "../anims/EnemyAnims";
+import { createCharacterAnims } from "../anims/CharacterAnims";
+import Lizard from "../enemies/lizard";
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private faune!: Phaser.Physics.Arcade.Sprite;
@@ -13,6 +16,9 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    createLizardAnims(this.anims);
+    createCharacterAnims(this.anims);
+
     const map = this.make.tilemap({ key: "dungeon" });
     const tileset = map.addTilesetImage("dungeon", "tiles", 16, 16);
 
@@ -29,48 +35,19 @@ export default class Game extends Phaser.Scene {
     // change character size
     this.faune.body.setSize(this.faune.width * 0.5, this.faune.height * 0.8);
 
-    this.anims.create({ key: "faune-idle-down", frames: [{ key: "faune", frame: "sprites/walk-down/walk-down-3.png" }] });
-
-    this.anims.create({ key: "faune-idle-up", frames: [{ key: "faune", frame: "sprites/walk-up/walk-up-3.png" }] });
-
-    this.anims.create({ key: "faune-idle-side", frames: [{ key: "faune", frame: "sprites/walk-side/walk-side-3.png" }] });
-
-    this.anims.create({
-      key: "faune-run-down",
-      frames: this.anims.generateFrameNames("faune", { start: 1, end: 8, prefix: "sprites/run-down/run-down-", suffix: ".png" }),
-      repeat: -1,
-      frameRate: 15,
-    });
-
-    this.anims.create({
-      key: "faune-run-up",
-      frames: this.anims.generateFrameNames("faune", { start: 1, end: 8, prefix: "sprites/run-up/run-up-", suffix: ".png" }),
-      repeat: -1,
-      frameRate: 15,
-    });
-
-    this.anims.create({
-      key: "faune-run-side",
-      frames: this.anims.generateFrameNames("faune", { start: 1, end: 8, prefix: "sprites/run-side/run-side-", suffix: ".png" }),
-      repeat: -1,
-      frameRate: 15,
-    });
-
     // Setup start
     this.faune.anims.play("faune-idle-down");
     this.physics.add.collider(this.faune, wallsLayer);
     this.cameras.main.startFollow(this.faune, true);
 
-    const lizard = this.add.sprite(256, 128, "lizard", "lizard_m_idle_anim_f0.png");
-
-    this.anims.create({
-      key: "lizard-idle",
-      frames: this.anims.generateFrameNames("lizard", { start: 0, end: 3, prefix: "lizard_m_idle_anim_f", suffix: ".png" }),
-      repeat: -1,
-      frameRate: 10,
+    const lizards = this.physics.add.group({
+      classType: Lizard,
     });
 
-    lizard.anims.play("lizard-idle");
+    lizards.get(256, 128, "lizard");
+    // const lizard = this.physics.add.sprite(256, 128, "lizard", "lizard_m_idle_anim_f0.png");
+
+    // lizard.anims.play("lizard-idle");
   }
 
   update(time: number, delta: number): void {
