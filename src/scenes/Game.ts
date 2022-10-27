@@ -5,6 +5,8 @@ import { createCharacterAnims } from "../anims/CharacterAnims";
 import Lizard from "../enemies/lizard";
 import "../characters/Faune";
 import Faune from "../characters/Faune";
+import { sceneEvents } from "../events/EventCenter";
+
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private faune!: Faune;
@@ -18,6 +20,9 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    // Run UI
+    this.scene.run("game-ui");
+
     // Create animations
     createLizardAnims(this.anims);
     createCharacterAnims(this.anims);
@@ -81,7 +86,12 @@ export default class Game extends Phaser.Scene {
 
     // Push player away on hit
     const dir = new Phaser.Math.Vector2(dx, dy).normalize().scale(200);
+
+    // Take damage
     this.faune.handleDamage(dir);
+
+    // Reduce life
+    sceneEvents.emit("player-health-changed", this.faune.health);
   }
 
   update(time: number, delta: number): void {
