@@ -35,8 +35,14 @@ export default class Game extends Phaser.Scene {
     // Add before player layer
     map.createLayer("Ground", tileset);
 
+    // Add weapons
+    const knives = this.physics.add.group({
+      classType: Phaser.Physics.Arcade.Image,
+    });
+
     // Add player
     this.faune = this.add.faune(128, 128, "faune");
+    this.faune.setKnives(knives);
 
     // Add after player layer
     const wallsLayer = map.createLayer("Walls", tileset);
@@ -65,6 +71,14 @@ export default class Game extends Phaser.Scene {
     // Add collisions
     this.physics.add.collider(this.faune, wallsLayer);
     this.physics.add.collider(lizards, wallsLayer);
+    this.physics.add.collider(knives, wallsLayer);
+    this.physics.add.collider(
+      knives,
+      lizards,
+      this.handleKnifeLizardCollision,
+      undefined
+    );
+
     this.playerLizardCollider = this.physics.add.collider(
       lizards,
       this.faune,
@@ -74,7 +88,15 @@ export default class Game extends Phaser.Scene {
     );
   }
 
-  // Enemy colision handler
+  //  Weapons collision handler
+  private handleKnifeLizardCollision(
+    obj1: Phaser.GameObjects.GameObject,
+    obj2: Phaser.GameObjects.GameObject
+  ) {
+    console.log(obj1);
+  }
+
+  // Enemy collision handler
   private handlePlayerLizardCollision(
     obj1: Phaser.GameObjects.GameObject,
     obj2: Phaser.GameObjects.GameObject

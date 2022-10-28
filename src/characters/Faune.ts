@@ -24,6 +24,7 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
   private healthState = HealthState.IDLE;
   private damageTime = 0;
   private _health = 3;
+  private knives?: Phaser.Physics.Arcade.Group;
 
   get health() {
     return this._health;
@@ -39,6 +40,10 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, texture, frame);
 
     this.anims.play("faune-idle-down");
+  }
+
+  setKnives(knives: Phaser.Physics.Arcade.Group) {
+    this.knives = knives;
   }
 
   handleDamage(dir: Phaser.Math.Vector2) {
@@ -66,6 +71,42 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
       this.healthState = HealthState.DAMAGE;
       this.damageTime = 0;
     }
+  }
+
+  private throwKnife() {
+    // If not knives do nothing
+    if (!this.knives) {
+      return;
+    }
+    const parts = this.anims.currentAnim.key.split("-");
+    const direction = parts[2];
+
+    const vector = new Phaser.Math.Vector2(0, 0);
+
+    switch (direction) {
+      case "up":
+        vector.y = -1;
+        break;
+      case "down":
+        vector.y = 1;
+        break;
+      default:
+      case "side":
+        if (this.scaleX < 0) {
+          vector.x = -1;
+        } else {
+          vector.x = 1;
+        }
+        break;
+    }
+    const angle = vector.angle();
+    const knife = this.knives.get(
+      this.x,
+      this.y,
+      "knife"
+    ) as Phaser.Physics.Arcade.Image;
+    knife.setRotation(angle);
+    knife.setVelocity(vector.x * 300, vector.y * 300);
   }
 
   protected preUpdate(time: number, delta: number): void {
@@ -96,6 +137,11 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
     }
 
     if (!cursors) {
+      return;
+    }
+
+    if (Phaser.Input.Keyboard.JustDown(cursors.space!)) {
+      this.throwKnife();
       return;
     }
 
