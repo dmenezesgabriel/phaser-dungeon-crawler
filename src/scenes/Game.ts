@@ -10,6 +10,7 @@ import { sceneEvents } from "../events/EventCenter";
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private faune!: Faune;
+  private playerLizardCollider!: Phaser.Physics.Arcade.Collider;
 
   constructor() {
     super("game");
@@ -64,7 +65,7 @@ export default class Game extends Phaser.Scene {
     // Add collisions
     this.physics.add.collider(this.faune, wallsLayer);
     this.physics.add.collider(lizards, wallsLayer);
-    this.physics.add.collider(
+    this.playerLizardCollider = this.physics.add.collider(
       lizards,
       this.faune,
       this.handlePlayerLizardCollision,
@@ -92,6 +93,11 @@ export default class Game extends Phaser.Scene {
 
     // Reduce life
     sceneEvents.emit("player-health-changed", this.faune.health);
+
+    // If dead don't collide
+    if (this.faune.health <= 0) {
+      this.playerLizardCollider?.destroy();
+    }
   }
 
   update(time: number, delta: number): void {
