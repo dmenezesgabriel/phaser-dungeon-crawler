@@ -105,6 +105,8 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
       this.y,
       "knife"
     ) as Phaser.Physics.Arcade.Image;
+    knife.setActive(true);
+    knife.setVisible(true);
     knife.setRotation(angle);
     knife.setVelocity(vector.x * 300, vector.y * 300);
   }
