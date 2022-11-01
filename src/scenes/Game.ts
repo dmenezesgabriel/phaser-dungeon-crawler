@@ -7,6 +7,7 @@ import "../characters/Faune";
 import Faune from "../characters/Faune";
 import { sceneEvents } from "../events/EventCenter";
 import { createTreasureAnims } from "../anims/TreasureAnims";
+import Chest from "../items/Chest";
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private faune!: Faune;
@@ -54,19 +55,20 @@ export default class Game extends Phaser.Scene {
     wallsLayer.setCollisionByProperty({ collides: true });
 
     // Add items
-    const chests = this.physics.add.staticGroup();
+    const chests = this.physics.add.staticGroup({
+      classType: Chest,
+    });
     const chestLayer = map.getObjectLayer("Chests");
     chestLayer.objects.forEach((chestObject) => {
       chests.get(
         chestObject.x! + chestObject.width! * 0.5,
         chestObject.y! - chestObject.height! * 0.5,
-        "treasure",
-        "chest_empty_open_anim_f0.png"
+        "treasure"
       );
     });
 
     // Debug collisions
-    debugDraw(wallsLayer, this);
+    // debugDraw(wallsLayer, this);
 
     // Setup camera
     this.cameras.main.startFollow(this.faune, true);
@@ -85,8 +87,14 @@ export default class Game extends Phaser.Scene {
 
     // Add collisions
     this.physics.add.collider(this.faune, wallsLayer);
-    this.physics.add.collider(this.faune, chests);
     this.physics.add.collider(this.lizards, wallsLayer);
+    this.physics.add.collider(
+      this.faune,
+      chests,
+      this.handlePlayerChestCollision,
+      undefined,
+      this
+    );
     this.physics.add.collider(
       this.knives,
       wallsLayer,
@@ -111,6 +119,15 @@ export default class Game extends Phaser.Scene {
     );
   }
 
+  // Chest collision handler
+  private handlePlayerChestCollision(
+    obj1: Phaser.GameObjects.GameObject,
+    obj2: Phaser.GameObjects.GameObject
+  ) {
+    console.dir(obj1);
+    console.dir(obj2);
+  }
+
   // Weapons wall collision handler
   private handleKnifeWallCollision(
     obj1: Phaser.GameObjects.GameObject,
@@ -125,6 +142,7 @@ export default class Game extends Phaser.Scene {
     obj2: Phaser.GameObjects.GameObject
   ) {
     this.knives.killAndHide(obj1);
+    this.lizards.killAndHide(obj2);
   }
 
   // Enemy collision handler
