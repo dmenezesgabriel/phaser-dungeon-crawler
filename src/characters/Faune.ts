@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import Chest from "../items/Chest";
 
 // Merge interface declaration to types
 declare global {
@@ -24,7 +25,9 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
   private healthState = HealthState.IDLE;
   private damageTime = 0;
   private _health = 3;
+  private _coins = 0;
   private knives?: Phaser.Physics.Arcade.Group;
+  private activeChest?: Chest;
 
   get health() {
     return this._health;
@@ -44,6 +47,10 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
 
   setKnives(knives: Phaser.Physics.Arcade.Group) {
     this.knives = knives;
+  }
+
+  setChest(chest: Chest) {
+    this.activeChest = chest;
   }
 
   handleDamage(dir: Phaser.Math.Vector2) {
@@ -143,11 +150,21 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
     }
 
     if (Phaser.Input.Keyboard.JustDown(cursors.space!)) {
-      this.throwKnife();
+      if (this.activeChest) {
+        const coins = this.activeChest.open();
+        this._coins += coins;
+      } else {
+        this.throwKnife();
+      }
       return;
     }
 
     const speed = 100;
+    const leftDown = cursors.left?.isDown;
+    const rightDown = cursors.right?.isDown;
+    const upDown = cursors.up?.isDown;
+    const downDown = cursors.down?.isDown;
+
     if (cursors.left?.isDown) {
       this.anims.play("faune-run-side", true);
       this.setVelocity(-speed, 0);
