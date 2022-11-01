@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="4">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="10">
  <editorsettings>
   <export target="../public/tiles/dungeon-01.json" format="json"/>
  </editorsettings>
@@ -5338,5 +5338,13 @@
   <object id="1" gid="596" x="160" y="46" width="16" height="16"/>
   <object id="2" gid="596" x="480" y="316" width="16" height="16"/>
   <object id="3" gid="596" x="94.6667" y="304" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="4" name="Lizards">
+  <object id="4" name="lizard6" class="lizard" gid="489" x="481.333" y="184.667" width="16" height="16"/>
+  <object id="5" name="lizard5" class="lizard" gid="489" x="406.667" y="270.667" width="16" height="16"/>
+  <object id="6" name="lizard1" class="lizard" gid="489" x="34" y="215.333" width="16" height="16"/>
+  <object id="7" name="lizard2" class="lizard" gid="489" x="230" y="72" width="16" height="16"/>
+  <object id="8" name="lizard2" class="lizard" gid="489" x="30.6667" y="328" width="16" height="16"/>
+  <object id="9" name="lizard4" class="lizard" gid="489" x="230.667" y="418" width="16" height="16"/>
  </objectgroup>
 </map>
