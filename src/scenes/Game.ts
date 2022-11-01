@@ -126,6 +126,8 @@ export default class Game extends Phaser.Scene {
   ) {
     console.dir(obj1);
     console.dir(obj2);
+    const chest = obj2 as Chest;
+    this.faune.setChest(chest);
   }
 
   // Weapons wall collision handler

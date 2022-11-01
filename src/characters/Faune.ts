@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Chest from "../items/Chest";
+import { sceneEvents } from "../events/EventCenter";
 
 // Merge interface declaration to types
 declare global {
@@ -153,6 +154,7 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
       if (this.activeChest) {
         const coins = this.activeChest.open();
         this._coins += coins;
+        sceneEvents.emit("player-coins-changed", this._coins);
       } else {
         this.throwKnife();
       }
@@ -165,22 +167,22 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
     const upDown = cursors.up?.isDown;
     const downDown = cursors.down?.isDown;
 
-    if (cursors.left?.isDown) {
+    if (leftDown) {
       this.anims.play("faune-run-side", true);
       this.setVelocity(-speed, 0);
       // Change sprite direction
       this.scaleX = -1;
       // enable debug to see character area
       this.body.offset.x = 24;
-    } else if (cursors.right?.isDown) {
+    } else if (rightDown) {
       this.anims.play("faune-run-side", true);
       this.setVelocity(speed, 0);
       this.scaleX = 1;
       this.body.offset.x = 8;
-    } else if (cursors.up?.isDown) {
+    } else if (upDown) {
       this.anims.play("faune-run-up", true);
       this.setVelocity(0, -speed);
-    } else if (cursors.down?.isDown) {
+    } else if (downDown) {
       this.anims.play("faune-run-down", true);
       this.setVelocity(0, speed);
     } else {
@@ -188,6 +190,9 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
       parts[1] = "idle";
       this.anims.play(parts.join("-"));
       this.setVelocity(0, 0);
+    }
+    if (leftDown || rightDown || upDown || downDown) {
+      this.activeChest = undefined;
     }
   }
 }
