@@ -89,7 +89,6 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.faune, wallsLayer);
     this.physics.add.collider(this.lizards, wallsLayer);
     this.physics.add.collider(
-<<<<<<< HEAD
       this.faune,
       chests,
       this.handlePlayerChestCollision,
@@ -97,8 +96,6 @@ export default class Game extends Phaser.Scene {
       this
     );
     this.physics.add.collider(
-=======
->>>>>>> 467e8d6f2c0e26b77f11332eca97e4c9bfea5aa8
       this.knives,
       wallsLayer,
       this.handleKnifeWallCollision,
@@ -122,7 +119,6 @@ export default class Game extends Phaser.Scene {
     );
   }
 
-<<<<<<< HEAD
   // Chest collision handler
   private handlePlayerChestCollision(
     obj1: Phaser.GameObjects.GameObject,
@@ -132,8 +128,6 @@ export default class Game extends Phaser.Scene {
     console.dir(obj2);
   }
 
-=======
->>>>>>> 467e8d6f2c0e26b77f11332eca97e4c9bfea5aa8
   // Weapons wall collision handler
   private handleKnifeWallCollision(
     obj1: Phaser.GameObjects.GameObject,
@@ -148,10 +142,7 @@ export default class Game extends Phaser.Scene {
     obj2: Phaser.GameObjects.GameObject
   ) {
     this.knives.killAndHide(obj1);
-<<<<<<< HEAD
     this.lizards.killAndHide(obj2);
-=======
->>>>>>> 467e8d6f2c0e26b77f11332eca97e4c9bfea5aa8
   }
 
   // Enemy collision handler
